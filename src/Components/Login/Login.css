@@ -1,0 +1,108 @@
+.Login{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.LoginCard{
+    display: flex;
+    width: 850px;
+    height: 500px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
+    border-radius: 7px;
+}
+.LoginImgDiv{
+    width: 50%;
+    height: 100%;
+}
+.LoginImgDiv img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+}
+.logininput{
+    background-color: white;
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center ;
+    border-radius:7px ;
+}
+.logininput h1{
+    color: #2596be;
+}
+.logininput input{
+    margin:  10px 0;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #2596be;
+    width: 220px;
+}
+.logininput button {    
+    background-color: white;
+    border: 1px solid #2596be;
+    width: 100px;
+    height: 25px;
+    margin-top: 20px;
+    color: #2596be;
+    outline: none;
+}
+
+.logininput button:hover{
+    background-color: #2596be;
+    color: white;
+}
+.logininput a{
+    margin-top: 105px;
+    font-size: 13px;
+    color: #2596be;
+    text-decoration: none;
+}
+
+.erroLogin {
+    font-size: 10px;
+    color: red;
+    height: 5px;
+}
+.errorLogin{
+    color: red;
+    font-size: 15px;
+    margin-top: 15px;
+    height: 15px;
+}
+.Loginerror{
+    border-bottom: 1px solid red !important;
+}
+@media screen and (max-width: 600px) {
+.LoginImgDiv{
+    display: none;
+}
+.logininput{
+    width: 100%;
+}
+.LoginCard{
+    width: 100%;
+}
+.Login{
+    display: block;
+    height: 100%;
+    margin: auto;
+}
+.LoginCardLogin{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+body{
+    background-image: url("../../Img/photo-1511556820780-d912e42b4980.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+}
