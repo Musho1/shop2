@@ -1,11 +1,13 @@
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import Avatar from '../Avatar/Avatar'
+import AvatarMenu from '../AvatarMenu/AvatarMenu'
 import './NavBar.css'
 function Navbar(){
     const {user}=useSelector(state=>state.user)
     
     const history=useHistory()
+    const {openAvatarMenu}=useSelector((state)=>state.avatarmenu)
     return <nav className="navbar">
         <ul className="navbarul">
             <li>Shope</li>
@@ -17,7 +19,10 @@ function Navbar(){
             <li>
                 {user.name===undefined?
                     <button onClick={()=>{history.push('/login')}}>Logn</button>
-                    :<Avatar name={user.name}></Avatar>
+                    :<Avatar  name={user.name}></Avatar>
+                }
+                {openAvatarMenu &&
+                    <AvatarMenu></AvatarMenu>
                 }
             </li>
         </ul>

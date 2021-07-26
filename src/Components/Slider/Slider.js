@@ -30,7 +30,7 @@ function Slider(){
     return <div className="slider">
         <div className="sliderDiv">
             {slider.length!==0 &&
-                <img  src={slider[index].image}></img>
+                <img alt="ss"  src={slider[index].image}></img>
             }   
         </div>
         <div className="SliderButton">

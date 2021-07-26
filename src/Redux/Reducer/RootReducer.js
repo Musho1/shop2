@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import AvatarMenuReducer from './AvatarMenuReducer'
 import LoginReducer from './LoginReducer'
 import SignUpReducer from './SignUpreducer'
 import SliderReducer from './SliderReducer'
@@ -8,4 +9,5 @@ export default combineReducers({
     login:LoginReducer,
     user:UserReducer,
     slider:SliderReducer,
+    avatarmenu:AvatarMenuReducer,
 })

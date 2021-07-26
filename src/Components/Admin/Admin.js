@@ -18,7 +18,6 @@ function Admin (){
       formData.append("file", file);
       formData.append("fileName", fileName);
        axios.post( "http://localhost:5001/uploadFileAPI",formData).then((r)=>{
-           console.log(r)
        });
       } 
     const {slider}=useSelector((state=>state.slider))
@@ -34,7 +33,7 @@ function Admin (){
             {slider.map((elm,i)=>{
             return  <div key={i} className="adminimg">
                     <p onClick={()=>dispatch(DeletImgSlider(elm.imgName,elm.id))} >x</p>
-                    <img src={elm.image}></img>
+                    <img alt="ss" src={elm.image}></img>
             </div>
             })
 
