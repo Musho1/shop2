@@ -1,4 +1,4 @@
-const express=require('express')
+const express=require('express');
 
 const PORt=5001
 const cors=require('cors')
@@ -6,23 +6,23 @@ const app=express()
 const jwt=require('jsonwebtoken')
 const fileUpload = require('express-fileupload')
 const passport =require('passport')
-
+const fs=require('fs')
 
 app.use(cors({
     origin:true,
     methods:["GET",'POST'],
     credentials:true
 }))
-app.use(express.static('public'))
+
+
 app.use(express.json())
 app.use (passport.initialize())
 app.use(fileUpload())
-
-
+app.use('/public', express.static('public'))
+const path = require('path');
 
 const { User , Slider } = require('./db')
 
-const {storage,upload}=require('./multer')
 
 app.post('/',(req,res)=>{
     let data=''
@@ -98,15 +98,49 @@ app.post('/GetUserByToken',(req,res)=>{
 })
 
 
-
-
-
-
-app.post("/api/image", upload.single('image'),(req, res, err) => {
-    if (!req.file.originalname.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF)$/)) {
-        res.send({ msg:'Only image files (jpg, jpeg, png) are allowed!'})};
-        const image = req.file.filename;
-        console.log(image)
+app.get('/getsliderfile',async(req,res)=>{
+    const slider = await Slider.findAll();
+    res.send({slider:slider})
 })
+
+
+  app.post('/uploadFileAPI', async(req, res) => {
+
+    if (!req.files) {
+        return res.status(500).send({ msg: "file is not found" })
+    }
+    const myFile = req.files.file;
+    const image=`http://localhost:5001/public/${myFile.name}`
+    let x=await Slider.create({image:image,imgName:myFile.name})
+
+    myFile.mv(`${__dirname}/public/${myFile.name}`, function (err) {
+      
+
+        if (err) {
+            return res.status(500).send({ msg: "Error occured" });
+        }
+
+        return res.send({name: myFile.name, path: `/${myFile.name}`});
+    });
+})
+
+
+
+
+app.post('/deletimg', async (req, res) => {
+    try {
+        fs.unlinkSync(`./public/${req.body.name}`);
+        res.status(201).send({ message: "Image deleted" });
+        
+        Slider.destroy({
+            where: {id:req.body.id}
+           }).then(() => {
+            res.status(204).end();
+           });
+    } catch (e) {
+        res.status(400).send({ message: "Error deleting image!", error: e.toString(), req: req.body });
+    }
+});
+
 
 app.listen(PORt,()=>console.log('ok'))

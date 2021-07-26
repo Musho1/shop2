@@ -1,5 +1,5 @@
 const {Sequelize,Model,DataTypes}=require('sequelize')
-const sequelize=new Sequelize('shop1','root','',{
+const sequelize=new Sequelize('shop','user1','123456',{
     host:'localhost',
     dialect:'mysql'
 })
@@ -29,11 +29,9 @@ Slider.init({
         primaryKey:true,
         autoIncrement:true
     },
-    // type:DataTypes.STRING,
-    // name:DataTypes.STRING,
-    // imamfe:DataTypes.BLOB('long'),
-    imageName:DataTypes.STRING,
-    ImageData:DataTypes.STRING
+
+    image:DataTypes.STRING,
+    imgName:DataTypes.STRING
 },{
     sequelize,
     modelName:'Slider'

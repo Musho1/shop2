@@ -4,7 +4,6 @@ import Avatar from '../Avatar/Avatar'
 import './NavBar.css'
 function Navbar(){
     const {user}=useSelector(state=>state.user)
-    console.log(user)
     
     const history=useHistory()
     return <nav className="navbar">

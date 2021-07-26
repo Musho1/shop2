@@ -6,7 +6,6 @@ export const SignUpUser=(user)=>{
             window.location.href="/login"
         })
         .catch((error)=>{
-            console.log('ss')
             dispatch(ErrorSignUp("error"))
         })
     }

@@ -1,48 +1,47 @@
-import axios from "axios"
-import { useState } from "react"
-import { useDispatch } from "react-redux"
-import { SendImgSlider } from "../../Redux/Action/SliderAction"
+import axios from "axios";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { DeletImgSlider } from "../../Redux/Action/SliderAction";
+import './admin.css' 
 
 function Admin (){
-    const imageHandler=(event)=>{
-        const file=event.target.files[0]
-        const formData=new FormData()
-        formData.append('image', event.target.files[0]);
-        console.log(formData.append('image',file))
+    const [file, setFile] = useState();
+    const [fileName, setFileName] = useState("");
+    const dispatch=useDispatch()
+    const saveFile = (e) => {
+      setFile(e.target.files[0]);
+      setFileName(e.target.files[0].name);
+    };
+  
+      const uploadFile = async (e) => {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("fileName", fileName);
+       axios.post( "http://localhost:5001/uploadFileAPI",formData).then((r)=>{
+           console.log(r)
+       });
+      } 
+    const {slider}=useSelector((state=>state.slider))
+    
+    return <div className="admin">
+      <hr></hr>
+      <h3>Slider</h3>
+       <input type="file" onChange={saveFile} />
+      <button onClick={uploadFile}>Upload</button>
 
-        fetch('http://localhost:5001/api/image',{
-            method:'POST',
-            body:formData,
-            headers:{
-                'Accept':'multipart/form-data'
-            },
-            credentials:'include'
-        }).then(res=>res.json())
-        // .then(res=>)
-        // dispatch(SendImgSlider(formData))
-    }
-    return <div>
-       <form method="POST" action="http://localhost:5001/profile-upload-single" enctype="multipart/form-data">
-        <div>
-            <label>Upload profile picture</label>
-            <input type="file" name="profile-file" required/>
-        </div>
-        <div>
-            <input type="submit" value="Upload" />
-        </div>
-    </form>
+      <div>
+          <div className="adminImg">
+            {slider.map((elm,i)=>{
+            return  <div key={i} className="adminimg">
+                    <p onClick={()=>dispatch(DeletImgSlider(elm.imgName,elm.id))} >x</p>
+                    <img src={elm.image}></img>
+            </div>
+            })
 
-    <hr />
-
-    <form method="POST" action="/profile-upload-multiple" enctype="multipart/form-data">
-        <div>
-            <label>Upload multiple profile picture</label>
-            <input type="file" name="profile-files" required multiple  />
-        </div>
-        <div>
-            <input type="submit" value="Upload" />
-        </div>
-    </form>
+            }
+          </div>
+          <hr></hr>
+      </div>
     </div>
 }
 export default Admin
