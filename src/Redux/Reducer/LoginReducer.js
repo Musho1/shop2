@@ -5,6 +5,12 @@ function LoginReducer(state=LoginState,action){
     if(action.type==="LoginSenderror"){
         temp.errorLogin="Error"
     }
+    if(action.type==='staretGetuser'){
+        temp.loginloading=true
+    }
+    if(action.type==='EndGetUserByToken'){
+        temp.loginloading=false
+    }
     return temp
 }
 export default LoginReducer

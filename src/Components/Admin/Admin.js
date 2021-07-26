@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { DeletImgSlider } from "../../Redux/Action/SliderAction";
+import Product from "./AdmicCreatProduct";
 import './admin.css' 
 
 function Admin (){
@@ -18,6 +19,7 @@ function Admin (){
       formData.append("file", file);
       formData.append("fileName", fileName);
        axios.post( "http://localhost:5001/uploadFileAPI",formData).then((r)=>{
+         console.log(r)
        });
       } 
     const {slider}=useSelector((state=>state.slider))
@@ -40,6 +42,9 @@ function Admin (){
             }
           </div>
           <hr></hr>
+      </div>
+      <div>
+        <Product></Product>
       </div>
     </div>
 }

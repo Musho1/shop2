@@ -3,6 +3,7 @@ import axios from "axios"
 export const LoginUser=(user)=>{
     console.log(user)
     return dispatch=>{
+        dispatch(staretGetuser())
         axios.post('http://localhost:5001/login',JSON.stringify(user)).then((r)=>{
             sessionStorage.setItem('token',r.data.token)
             window.location.href="/"
@@ -33,7 +34,11 @@ const EndGetUserByToken=(user)=>{
     }
 }
 
-
+const staretGetuser=()=>{
+    return {
+        type:'staretGetuser'
+    }
+}
 
 const LoginSenderror=()=>{
     return {

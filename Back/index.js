@@ -21,7 +21,7 @@ app.use(fileUpload())
 app.use('/public', express.static('public'))
 const path = require('path');
 
-const { User , Slider } = require('./db')
+const { User , Slider , Product, ProductImg } = require('./db')
 
 
 app.post('/',(req,res)=>{
@@ -141,6 +141,20 @@ app.post('/deletimg', async (req, res) => {
         res.status(400).send({ message: "Error deleting image!", error: e.toString(), req: req.body });
     }
 });
+
+
+app.post('/UploadPhotoForProduct',async(req,res)=>{
+    console.log(req.body.product)
+    // let x=await Product.create({name:req.body.data.name,price:+req.body.data.price})
+    // res.send({x})
+})
+
+
+
+
+
+
+
 
 
 app.listen(PORt,()=>console.log('ok'))

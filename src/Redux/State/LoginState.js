@@ -1,3 +1,4 @@
 export default{
-    errorLogin:''
+    errorLogin:'',
+    loginloading:false
 }

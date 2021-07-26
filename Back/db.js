@@ -38,7 +38,46 @@ Slider.init({
 })
 
 
+class Product extends Model{}
+Product.init({
+    id:{
+        type:DataTypes.INTEGER,
+        primaryKey:true,
+        autoIncrement:true
+    },
+    name:DataTypes.STRING,
+    price:DataTypes.INTEGER,
+
+},{
+    sequelize,
+    modelName:'Product'
+})
+
+
+
+class ProductImg extends Model{}
+ProductImg.init({
+    id:{
+        type:DataTypes.INTEGER,
+        primaryKey:true,
+        autoIncrement:true
+    },
+    image:DataTypes.STRING,
+    name:DataTypes.STRING,
+    ProductImg_id:DataTypes.INTEGER
+},{
+    sequelize,
+    modelName:'ProductImg'
+})
+
+
+
+
 // User.hasMany(order,{foreignKey:'order_key'})
+Product.hasMany(ProductImg,{foreignKey:'ProductImg_id'})
+ProductImg.belongsTo(ProductImg,{foreignKey:'ProductImg_id'})
 User.sync()
 Slider.sync()
-module.exports={User,Slider}
+Product.sync()
+ProductImg.sync()
+module.exports={User,Slider,Product,ProductImg}

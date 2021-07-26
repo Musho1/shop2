@@ -16,6 +16,8 @@ function MainPage(){
         }
         dispatch(GetImgSlider())
     },[])
+    const {loginloading}=useSelector((state)=>state.login)
+  
     return <div>
         <div>
             <Navbar></Navbar>
