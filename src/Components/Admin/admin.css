@@ -18,7 +18,7 @@
     height: 100%;
     object-fit:cover;
 }
-.adminimg p{
+.adminimg p,.removeselectimg{
     position: absolute;
     right:-11px;
     top: -26px;
@@ -31,4 +31,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.selectimgforcourse{
+    width: 150px;
+    height: 150px;
+    display: flex;
+    position: relative;
+    margin:30px  ;
+}
+.selectimgforcourse img{
+    width: 100%;
+    object-fit: cover;
+}
+.Selectimgforcourse{
+    display: flex;
 }
