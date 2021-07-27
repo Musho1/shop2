@@ -73,11 +73,21 @@ ProductImg.init({
 
 
 
-// User.hasMany(order,{foreignKey:'order_key'})
+
+
+
+
+
 Product.hasMany(ProductImg,{foreignKey:'ProductImg_id'})
-ProductImg.belongsTo(ProductImg,{foreignKey:'ProductImg_id'})
+ProductImg.belongsTo(Product,{foreignKey:'ProductImg_id'})
+
+
+
 User.sync()
 Slider.sync()
 Product.sync()
 ProductImg.sync()
-module.exports={User,Slider,Product,ProductImg}
+
+
+
+module.exports={  User,Slider,Product,ProductImg}

@@ -144,17 +144,30 @@ app.post('/deletimg', async (req, res) => {
 
 
 app.post('/UploadPhotoForProduct',async(req,res)=>{
-    console.log(req.body.product)
-    // let x=await Product.create({name:req.body.data.name,price:+req.body.data.price})
-    // res.send({x})
+    let product=JSON.parse(req.body.data)
+    let x=await Product.create({name:product.name,price:+product.price})
+    console.log(req.files.images.length)
+    if (!req.files) {
+        return res.status(500).send({ msg: "file is not found" })
+    }
+    req.files.images.map(async(elm)=>{
+        console.log(elm.name)
+        const myFile = elm;
+        console.log(myFile.name)
+        const image=`http://localhost:5001/public/${myFile.name}`
+        let y=await ProductImg.create({image:image,name:myFile.name,ProductImg_id:x.dataValues.id}) 
+        myFile.mv(`${__dirname}/public/${myFile.name}`, function (err) {
+        });
+    })
+    res.send('ok')
 })
 
-
-
-
-
-
-
+app.get('/getAllProduct',async(req,res)=>{     
+     const product = await Product.findAll({
+        include: ProductImg
+      });
+    res.send({product:product})
+})
 
 
 app.listen(PORt,()=>console.log('ok'))
