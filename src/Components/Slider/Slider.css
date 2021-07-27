@@ -1,9 +1,11 @@
 .slider{
-    width: 95%;
+    /* width: 95%; */
+    padding: 0 30px;
     max-height: 400px;
     margin: auto;
     margin-top: 10px;
     position: relative;
+    max-width: 2000px;
 }
 .sliderDiv{
     width: 100%;
@@ -23,6 +25,7 @@
     top: 0;
     bottom: 0;
     height: 100%;
+    right: 0;
 }
 .SliderButton button{
     height: 100%;
@@ -48,4 +51,22 @@
 .activeSlider{
     background-color: white;
     opacity: 0.5;
+}
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 600px) {
+    .slider{
+        width: 100%;
+        padding: 0;
+    }    
+    .sliderDiv{
+        height: 250px;
+    }
 }

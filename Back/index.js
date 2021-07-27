@@ -21,7 +21,7 @@ app.use(fileUpload())
 app.use('/public', express.static('public'))
 const path = require('path');
 
-const { User , Slider , Product, ProductImg } = require('./db')
+const { User , Slider , Product, ProductImg ,Category,Product_Category} = require('./db')
 
 
 app.post('/',(req,res)=>{
@@ -142,28 +142,58 @@ app.post('/deletimg', async (req, res) => {
 
 app.post('/UploadPhotoForProduct',async(req,res)=>{
     let product=JSON.parse(req.body.data)
+
     let x=await Product.create({name:product.name,price:+product.price,Description:product.description})
-    console.log(req.files.images.length)
+    console.log(req.body)
     if (!req.files) {
         return res.status(500).send({ msg: "file is not found" })
     }
     req.files.images.map(async(elm)=>{
-        console.log(elm.name)
         const myFile = elm;
-        console.log(myFile.name)
         const image=`http://localhost:5001/public/${myFile.name}`
         let y=await ProductImg.create({image:image,name:myFile.name,ProductImg_id:x.dataValues.id}) 
         myFile.mv(`${__dirname}/public/${myFile.name}`, function (err) {
         });
+    })
+
+    product.category.map(async(elm)=>{
+        let z=await Product_Category.create({Product_id:x.dataValues.id,Categori_id:+elm}) 
+    console.log(z)
     })
     res.send('ok')
 })
 
 app.get('/getAllProduct',async(req,res)=>{     
      const product = await Product.findAll({
-        include: ProductImg
+        include: Category
       });
     res.send({product:product})
+})
+
+
+app.get('/getcategoris',async(req,res)=>{
+    const category=await Category.findAll()
+    res.send({category:category}) 
+})
+
+app.post('/getProductbyCategory',async(req,res)=>{
+    let id=''
+    if(req.body.type='Top'){
+        id=1
+    }
+    const post = await Product_Category.findAll({
+        include: {
+            model: Product,
+            include: ProductImg
+          },
+        where: {
+            Categori_id: 1
+        }
+    });
+
+
+console.log(post)
+    res.send({product_Category:post}) 
 })
 
 

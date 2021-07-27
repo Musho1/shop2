@@ -5,7 +5,9 @@ function Product (){
     const [file, setFile] = useState();
     const [fileName, setFileName] = useState("");
     const [images,setimages]=useState([])
-    const [product,setproduct]=useState({name:'',price:'',description:''})
+    const [product,setproduct]=useState({name:'',price:'',description:'',category:[]})
+    const [category,setCategory]=useState([])
+    const [selectCategory,setselectCategory]=useState([])
     const saveFile = (e) => {
         setFile(e.target.files[0]);
         setFileName(e.target.files[0].name);
@@ -13,6 +15,7 @@ function Product (){
         setimages(images)
     };
     const uploadFile = async (e) => {
+        
         const formData = new FormData();
         formData.append("file", file);
         formData.append("fileName", fileName);
@@ -28,14 +31,26 @@ function Product (){
 
         useEffect(()=>{
             axios.get( "http://localhost:5001/getAllProduct").then((r)=>{
-             console.log(r)
             });
-        })
-
+            axios.get( "http://localhost:5001/getcategoris").then((r)=>{
+                setCategory(r.data.category)
+            });
+            // axios.get( "http://localhost:5001/getProductbyCategory").then((r)=>{
+            //     console.log(r)
+            // });
+        },[])
         const removeSelectimg=(i)=>{
             let temp=[...images]
             temp.splice(i,1)
              setimages(temp)
+        }
+
+
+        const SelectCategory=(e)=>{
+            let temp=[...selectCategory]
+            temp.push(e)
+            setselectCategory(temp)
+            setproduct({...product,category:temp})
         }
 
     return <div>
@@ -44,7 +59,7 @@ function Product (){
                 images.map((elm,i)=>{
                     return <div key={i} className='selectimgforcourse'>
                         <p onClick={()=>removeSelectimg(i)} className="removeselectimg">x</p>
-                        <img  key={i} src={URL.createObjectURL(elm)}></img>
+                        <img key={i} src={URL.createObjectURL(elm)}></img>
                         </div>
                 })
             }
@@ -57,6 +72,14 @@ function Product (){
         </div>
         <div>
             <textarea  value={product.description} onChange={e=>(setproduct({...product,description:e.target.value}))}></textarea>
+        </div>
+        <div>
+            <select onChange={(e)=>SelectCategory(e.target.value)}>
+                {category!==undefined && category.map((elm,i)=>{
+                    return  <option key={i} value={elm.id}>{elm.name}</option>
+                })
+                }
+            </select>
         </div>
         <div>
             <input type="file" onChange={saveFile} />

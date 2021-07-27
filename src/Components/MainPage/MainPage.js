@@ -6,6 +6,8 @@ import { GetImgSlider } from "../../Redux/Action/SliderAction";
 import Admin from "../Admin/Admin";
 import Navbar from "../NavBar/NavBar";
 import Slider from "../Slider/Slider";
+import TopProduct from "../TopCourse/TopPrduct";
+import './MainPage.css'
 
 function MainPage(){
     const dispatch=useDispatch()
@@ -25,11 +27,13 @@ function MainPage(){
         {user.admin==='1' &&
             <Admin />
         }
-        <div onClick={()=>dispatch(CloseAvatarMenu())}>
-            {user.admin==='0' &&
-                <Slider></Slider>
-            }
-        </div>
+        {user.admin!=='1' &&
+            <div onClick={()=>dispatch(CloseAvatarMenu())}>
+                <div><Slider></Slider></div>
+                <div className="topProductMain"><TopProduct></TopProduct></div>
+            </div>
+        }
+        
     </div>
 }
 export default MainPage

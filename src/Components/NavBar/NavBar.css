@@ -7,6 +7,7 @@
 }
 .navbarul{
     display: flex;
+    margin: auto;
 }
 .navbarul li{
     margin:auto 85px;
@@ -22,6 +23,9 @@
     height: 100%;
     border-radius: 50%;
 }
+.navMobile{
+    display: none;
+}
 .navbarul button{
     border: 1px solid #2596be;
     width: 90px;
@@ -33,4 +37,25 @@
 .navbarul button:hover{
     background-color: #2596be;
     color: white;
+}
+
+.navbardiv{
+    display: flex;
+    align-items:center ;
+}
+
+@media screen and (max-width: 600px) {
+    .navbar{
+        display: none;
+    }
+    .navbarul{
+        padding: 10px 15px 0px 15px;
+        box-sizing: border-box;
+    }
+    .navMobile{
+        display: block;
+    }
+    .navbarul li{
+        margin: 0;
+    }
 }

@@ -8,7 +8,8 @@ function Navbar(){
     
     const history=useHistory()
     const {openAvatarMenu}=useSelector((state)=>state.avatarmenu)
-    return <nav className="navbar">
+    return <div className="navbardiv">
+    <nav className="navbar">
         <ul className="navbarul">
             <li>Shope</li>
             <li>Men</li>
@@ -27,5 +28,11 @@ function Navbar(){
             </li>
         </ul>
     </nav>
+    <nav className="navMobile">
+        <ul className="navbarul">
+            <li><i className="fas fa-bars"></i></li>
+        </ul>
+    </nav>
+    </div>
 }
 export default Navbar
