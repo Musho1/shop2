@@ -124,9 +124,6 @@ app.get('/getsliderfile',async(req,res)=>{
     });
 })
 
-
-
-
 app.post('/deletimg', async (req, res) => {
     try {
         fs.unlinkSync(`./public/${req.body.name}`);
@@ -145,7 +142,7 @@ app.post('/deletimg', async (req, res) => {
 
 app.post('/UploadPhotoForProduct',async(req,res)=>{
     let product=JSON.parse(req.body.data)
-    let x=await Product.create({name:product.name,price:+product.price})
+    let x=await Product.create({name:product.name,price:+product.price,Description:product.description})
     console.log(req.files.images.length)
     if (!req.files) {
         return res.status(500).send({ msg: "file is not found" })

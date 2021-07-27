@@ -47,7 +47,7 @@ Product.init({
     },
     name:DataTypes.STRING,
     price:DataTypes.INTEGER,
-
+    Description:DataTypes.STRING,
 },{
     sequelize,
     modelName:'Product'
@@ -69,6 +69,10 @@ ProductImg.init({
     sequelize,
     modelName:'ProductImg'
 })
+
+
+
+
 
 
 
