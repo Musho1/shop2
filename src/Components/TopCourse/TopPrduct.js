@@ -10,19 +10,21 @@ function TopProduct(){
     },[])
     const {Product}=useSelector((state=>state.product))
     const [max,setmax]=useState(document.documentElement.clientWidth>750?document.documentElement.clientWidth/300:3)
+    const [number,setnumber]=useState(parseInt(max))
     const [min,setmin]=useState(0)
     const addmax=()=>{
-        if(max+5<=Product.length+1){
-            setmax(max+5)
-            setmin(min+5)
+        if(max+number<=Product.length+1){
+            setmax(max+number)
+            setmin(min+number)
         }
     }
     const minusmax=()=>{
-        if(min-5>=0){
-            setmax(max-5)
-            setmin(min-5)
+        if(min-number>=0){
+            setmax(max-number)
+            setmin(min-number)
         }
     }
+    console.log(number,max,min)
     return <div  className="TopProduct">
         {
             Product.map((elm,i)=>{
