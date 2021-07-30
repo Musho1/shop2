@@ -47,3 +47,29 @@
 .Selectimgforcourse{
     display: flex;
 }
+
+.AdminCreatProduct div{
+    margin-top: 15px;
+}
+
+
+
+.adminNAv{
+    display: flex;
+    align-items: center;
+}
+.adminNAv ul{
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+.AdminProduct{
+    display: flex;
+    flex-wrap: wrap;
+    height: 100vh;
+
+}
+.AdminProductelm{
+    margin: 25px;
+
+}

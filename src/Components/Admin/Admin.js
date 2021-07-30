@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { DeletImgSlider } from "../../Redux/Action/SliderAction";
 import Product from "./AdmicCreatProduct";
 import './admin.css' 
+import AdminNav from "./AdminNav";
 
 function Admin (){
     const [file, setFile] = useState();
@@ -25,6 +26,7 @@ function Admin (){
     const {slider}=useSelector((state=>state.slider))
     
     return <div className="admin">
+      <AdminNav></AdminNav>
       <hr></hr>
       <h3>Slider</h3>
        <input type="file" onChange={saveFile} />

@@ -5,6 +5,9 @@ function ProductReducer(state=ProductState,action){
     if(action.type==='EndGetCategory'){
         temp.Product=action.value
     }
+    if(action.type==='endGetCourseByCount'){
+        temp.AllProduct=action.value
+    }
     return temp
 }
 export default ProductReducer

@@ -158,7 +158,6 @@ app.post('/UploadPhotoForProduct',async(req,res)=>{
 
     product.category.map(async(elm)=>{
         let z=await Product_Category.create({Product_id:x.dataValues.id,Categori_id:+elm}) 
-    console.log(z)
     })
     res.send('ok')
 })
@@ -190,10 +189,29 @@ app.post('/getProductbyCategory',async(req,res)=>{
             Categori_id: 1
         }
     });
-
-
-console.log(post)
     res.send({product_Category:post}) 
+})
+
+
+
+
+app.post('/GetAllproduct',async(req,res)=>{
+    const product = await Product.findAll({
+        include: ProductImg,
+    });
+    res.send({product:product})
+})
+
+
+app.post('/romovebyid',async(req,res)=>{
+    console.log(req.body.id,req.body.product_id)
+    Product_Category.destroy({
+        where: {id:req.body.product_id}
+    })
+    Product.destroy({
+        where:{id:req.body.product_id}
+    })
+    res.send('ok')
 })
 
 

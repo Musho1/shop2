@@ -54,6 +54,7 @@ function Product (){
         }
 
     return <div>
+        <h3>Create Product</h3>
         <div className="Selectimgforcourse">
             {
                 images.map((elm,i)=>{
@@ -64,27 +65,31 @@ function Product (){
                 })
             }
         </div>
-        <div>
-            <input  value={product.name} onChange={e=>(setproduct({...product,name:e.target.value}))} placeholder="name"></input>
+        <div className="AdminCreatProduct">
+            <div>
+                <input  value={product.name} onChange={e=>(setproduct({...product,name:e.target.value}))} placeholder="name"></input>
+            </div>
+            <div>
+                <input value={product.price} onChange={e=>(setproduct({...product,price:e.target.value}))} placeholder="price"></input>
+            </div>
+            <div>
+                <textarea placeholder="description" value={product.description} onChange={e=>(setproduct({...product,description:e.target.value}))}></textarea>
+            </div>
+            <div>
+                <p>Choose Category</p>
+                <select onChange={(e)=>SelectCategory(e.target.value)}>
+                    {category!==undefined && category.map((elm,i)=>{
+                        return  <option key={i} value={elm.id}>{elm.name}</option>
+                    })
+                    }
+                </select>
+            </div>
+            <div>
+                <input type="file" onChange={saveFile} />
+                <button onClick={uploadFile}>Upload</button>
+            </div>
         </div>
-        <div>
-            <input value={product.price} onChange={e=>(setproduct({...product,price:e.target.value}))} placeholder="price"></input>
-        </div>
-        <div>
-            <textarea  value={product.description} onChange={e=>(setproduct({...product,description:e.target.value}))}></textarea>
-        </div>
-        <div>
-            <select onChange={(e)=>SelectCategory(e.target.value)}>
-                {category!==undefined && category.map((elm,i)=>{
-                    return  <option key={i} value={elm.id}>{elm.name}</option>
-                })
-                }
-            </select>
-        </div>
-        <div>
-            <input type="file" onChange={saveFile} />
-            <button onClick={uploadFile}>Upload</button>
-        </div>
+        <hr></hr>
     </div>
 }
 export default Product

@@ -1,3 +1,4 @@
 export default {
-    Product:[]
+    Product:[],
+    AllProduct:[]
 }

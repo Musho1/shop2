@@ -106,35 +106,8 @@ Product_Category.init({
 
 
 
-// Product_Category.hasMany(Product,{foreignKey:'Product_id'})
-// Product_Category.hasMany(Category,{foreignKey:'Categori_id'})
 Product_Category.belongsTo(Product,{foreignKey:'Product_id'})
 Product_Category.belongsTo(Category,{foreignKey:'Categori_id'})
-
-// User.belongsToMany(Profile, { through: Product_Category });
-// Profile.belongsToMany(User, { through: Product_Category });
-
-
-// Product_Category.associate = (models) => {
-//     Product_Category.belongsTo(Product, { foreignKey: 'Product_id',});
-//     Product_Category.belongsTo(Category.Genre, { foreignKey: 'Categori_id',});
-//   }
-
-
-//   Category.associate = (models) => {
-//     Category.hasMany(Product);
-//     Category.belongsToMany(Product);
-//   }
-//   Product.associate = (models) => {
-//     Product.hasMany(Category);
-//     Product.belongsToMany(Category);
-//   }
-
-
-
-
-
-
 
 
 Product.hasMany(ProductImg,{foreignKey:'ProductImg_id'})

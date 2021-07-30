@@ -30,7 +30,9 @@ function MainPage(){
         {user.admin!=='1' &&
             <div onClick={()=>dispatch(CloseAvatarMenu())}>
                 <div><Slider></Slider></div>
-                <div className="topProductMain"><TopProduct></TopProduct></div>
+                <div className="topProductMain">
+                    <TopProduct></TopProduct>
+                </div>
             </div>
         }
         
